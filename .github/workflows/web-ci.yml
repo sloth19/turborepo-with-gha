@@ -20,5 +20,5 @@ jobs:
           node-version: 16.x
       - name: Install dependencies
         run: yarn --prefer-offline
-      - name: Build code
-        run: yarn run build
+      - name: Build admin code
+        run: yarn run build --scope=web --filter=web...
