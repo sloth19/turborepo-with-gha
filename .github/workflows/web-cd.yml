@@ -28,7 +28,9 @@ jobs:
           ssh -i ~/.ssh/gh_actions ec2-user@${{ secrets.HOST_NAME }} '
             cd ~/turborepo-with-gha &&
             pwd &&
-            git checkout main &&
+            eval $(ssh-agent -s) &&
+            ssh-add ~/.ssh/gh_actions &&
+            git checkout main &
             git fetch &&
             git reset --hard origin/main &&
             git merge origin/main &&
