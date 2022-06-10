@@ -29,7 +29,7 @@ jobs:
             cd ~/turborepo-with-gha &&
             eval $(ssh-agent -s) &&
             ssh-add ~/.ssh/gh_actions &&
-            ssh -T git@github.com &&
+            ssh -T git@github.com > /dev/null &&
             pwd &&
             git pull origin main
           '
