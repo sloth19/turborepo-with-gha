@@ -26,7 +26,7 @@ jobs:
 
       - name: Deploy over ssh
         run: |
-          ssh -i ~/.ssh/gh_actions ec2-user@${{ secrets.HOST_NAME }} '
+          ssh -i ~/.ssh/gh_actions ${{ secrets.USER_NAME }}@${{ secrets.HOST_NAME }} '
             cd ~/turborepo-with-gha &&
             eval $(ssh-agent -s) &&
             ssh-add ~/.ssh/gh_actions &&
@@ -35,7 +35,7 @@ jobs:
             git reset --hard origin/main &&
             git pull origin main &&
             
-            yarn run build --filter=web... &&
+            yarn run build --team=${{ secrets.TURBO_TEAM }} --token=${{ secrets.TURBO_TOKEN }} --filter=web... &&
 
             chmod +x .github/scripts/find-task-hash.sh &&
             BUILD_HASH=$(.github/scripts/find-task-hash.sh) &&
