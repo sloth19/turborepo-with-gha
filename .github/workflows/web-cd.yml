@@ -42,8 +42,7 @@ jobs:
             BUILD_HASH=$(.github/scripts/find-task-hash.sh) &&
             echo $BUILD_HASH &&
             
-            cd apps/web &&
-            pm2 stop --silent web &&
-            pm2 delete --silent web &&
+            cd apps/web &&            
+            pm2 delete -s web || : &&
             pm2 start yarn --name web -- run start "$BUILD_DIR/$BUILD_HASH/apps/web"
           '
