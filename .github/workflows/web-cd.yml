@@ -36,7 +36,9 @@ jobs:
             git pull origin main &&
             
             echo $TURBO_TEAM &&
+            echo ${{ secrets.TURBO_TEAM }} &&
             echo $TURBO_TOKEN &&
+            echo ${{ secrets.TURBO_TOKEN }} &&
             yarn run build --team=${{ secrets.TURBO_TEAM }} --token=${{ secrets.TURBO_TOKEN }} --filter=web... &&
 
             chmod +x .github/scripts/find-task-hash.sh &&
