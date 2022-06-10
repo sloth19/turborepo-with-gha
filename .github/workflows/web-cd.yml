@@ -4,6 +4,12 @@ on:
   push:
     branches: [main]
 
+env:
+  USER_NAME: ${{ secrets.USER_NAME }}
+  HOST_NAME: ${{ secrets.HOST_NAME }}
+  APP_DIR: turborepo-with-gha
+  BUILD_DIR: "../../node_modules/.cache/turbo"
+
 jobs:
   deploy:
     timeout-minutes: 15
@@ -17,4 +23,20 @@ jobs:
           known_hosts: ${{ secrets.KNOWN_HOSTS }}
           if_key_exists: fail # replace / ignore / fail; optional (defaults to fail)
       - name: Deploy over ssh
-        run: ls -al ~/.ssh
+        run: |
+          ssh -i ~/.ssh/gh_actions $USER_NAME@$HOST_NAME '
+            cd ~/$ADD_DIR &&
+            git checkout main &&
+            git fetch &&
+            git reset --hard origin/main &&
+            git merge origin/main &&
+          
+            yarn run build --filter=web... &&
+          
+            chmod +x .github/scripts/find-task-hash.sh &&
+            BUILD_HASH=$(.github/scripts/find-task-hash.sh) &&
+            echo $BUILD_HASH &&
+          
+            cd apps/web &&
+            pm2 start yarn --name web -- run start "$BUILD_DIR/$BUILD_HASH/apps/web"
+          '
