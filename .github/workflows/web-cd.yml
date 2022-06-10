@@ -30,7 +30,7 @@ jobs:
             eval $(ssh-agent -s) &&
             ssh-add ~/.ssh/gh_actions &&
             git checkout main &&
-            git fectch && 
+            git fetch && 
             git reset --hard origin/main &&
             git pull origin main &&
             
