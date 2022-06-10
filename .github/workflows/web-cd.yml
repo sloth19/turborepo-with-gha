@@ -27,9 +27,8 @@ jobs:
 
       - name: Deploy over ssh
         run: |
-          echo $USER_NAME
-          echo $HOST_NAME
           ssh -i ~/.ssh/gh_actions ec2-user@${{ secrets.HOST_NAME }} '
+            pwd &&
             cd ~/$ADD_DIR &&
             git checkout main &&
             git fetch &&
