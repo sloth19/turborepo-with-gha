@@ -30,18 +30,5 @@ jobs:
             pwd &&
             eval $(ssh-agent -s) &&
             ssh-add ~/.ssh/gh_actions &&
-            ls -al &&
-            git checkout main &
-            git fetch &&
-            git reset --hard origin/main &&
-            git merge origin/main &&
-          
-            yarn run build --filter=web... &&
-          
-            chmod +x .github/scripts/find-task-hash.sh &&
-            BUILD_HASH=$(.github/scripts/find-task-hash.sh) &&
-            echo $BUILD_HASH &&
-          
-            cd apps/web &&
-            pm2 start yarn --name web -- run start "$BUILD_DIR/$BUILD_HASH/apps/web"
+            ssh -vT git@github.com
           '
