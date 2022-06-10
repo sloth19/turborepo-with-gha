@@ -33,7 +33,7 @@ jobs:
             
             echo ${{ secrets.TURBO_TEAM }} &&
             echo ${{ secrets.TURBO_TOKEN }} &&
-            yarn run build --team=sloth19 --token=sqjBUqFcGLm77wPT05CtiuiF --filter=web... &&
+            yarn run build --team="sloth19" --token="${{ secrets.TURBO_TOKEN }}" --filter=web... &&
 
             chmod +x .github/scripts/find-task-hash.sh &&
             BUILD_HASH=$(.github/scripts/find-task-hash.sh) &&
