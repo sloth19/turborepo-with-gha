@@ -44,5 +44,6 @@ jobs:
             
             cd apps/web &&            
             pm2 delete -s web || : &&
+            echo "$BUILD_DIR/$BUILD_HASH/apps/web" &&
             pm2 start yarn --name web -- run start "$BUILD_DIR/$BUILD_HASH/apps/web"
           '
