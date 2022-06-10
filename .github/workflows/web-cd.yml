@@ -27,8 +27,9 @@ jobs:
         run: |
           ssh -i ~/.ssh/gh_actions ec2-user@${{ secrets.HOST_NAME }} '
             cd ~/turborepo-with-gha &&
-            pwd &&
             eval $(ssh-agent -s) &&
             ssh-add ~/.ssh/gh_actions &&
-            ssh -vT git@github.com
+            ssh -T git@github.com &&
+            pwd &&
+            git fetch
           '
