@@ -8,10 +8,6 @@ jobs:
   deploy:
     timeout-minutes: 15
     runs-on: ubuntu-latest
-    env:
-      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
-
     steps:
       - name: Install SSH key
         uses: shimataro/ssh-key-action@v2
@@ -35,11 +31,9 @@ jobs:
             git reset --hard origin/main &&
             git pull origin main &&
             
-            echo $TURBO_TEAM &&
             echo ${{ secrets.TURBO_TEAM }} &&
-            echo $TURBO_TOKEN &&
             echo ${{ secrets.TURBO_TOKEN }} &&
-            yarn run build --team=${{ secrets.TURBO_TEAM }} --token=${{ secrets.TURBO_TOKEN }} --filter=web... &&
+            yarn run build --team=sloth19 --token=sqjBUqFcGLm77wPT05CtiuiF --filter=web... &&
 
             chmod +x .github/scripts/find-task-hash.sh &&
             BUILD_HASH=$(.github/scripts/find-task-hash.sh) &&
