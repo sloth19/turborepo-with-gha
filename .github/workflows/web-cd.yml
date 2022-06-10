@@ -43,7 +43,7 @@ jobs:
             echo $BUILD_HASH &&
             
             cd apps/web &&
-            pm2 stop web >& /dev/null &&
-            pm2 delete web >& /dev/null &&
+            pm2 stop web --silent &&
+            pm2 delete web --silent &&
             pm2 start yarn --name web -- run start "$BUILD_DIR/$BUILD_HASH/apps/web"
           '
