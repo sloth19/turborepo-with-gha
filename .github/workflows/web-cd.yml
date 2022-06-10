@@ -35,13 +35,9 @@ jobs:
             git reset --hard origin/main &&
             git pull origin main &&
             
-<<<<<<< Updated upstream
-            yarn run build --filter=web... &&
-=======
             env | grep TURBO_TEAM &&
             env | grep TURBO_TOKEN &&
             yarn run build --team=${{ secrets.TURBO_TEAM }} --token=${{ secrets.TURBO_TOKEN }} --filter=web... &&
->>>>>>> Stashed changes
 
             chmod +x .github/scripts/find-task-hash.sh &&
             BUILD_HASH=$(.github/scripts/find-task-hash.sh) &&
