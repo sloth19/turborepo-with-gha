@@ -30,6 +30,7 @@ jobs:
             pwd &&
             eval $(ssh-agent -s) &&
             ssh-add ~/.ssh/gh_actions &&
+            ls -al &&
             git checkout main &
             git fetch &&
             git reset --hard origin/main &&
