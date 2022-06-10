@@ -31,5 +31,5 @@ jobs:
             ssh-add ~/.ssh/gh_actions &&
             ssh -T git@github.com &&
             pwd &&
-            git fetch
+            git pull origin main
           '
