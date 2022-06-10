@@ -8,9 +8,9 @@ jobs:
   build:
     timeout-minutes: 15
     runs-on: ubuntu-latest
-    env:
-      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+#    env:
+#      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+#      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -21,4 +21,4 @@ jobs:
       - name: Install dependencies
         run: yarn --prefer-offline
       - name: Build web code
-        run: yarn run build --filter=web...
+        run: yarn run build --team=sloth19 --token=sqjBUqFcGLm77wPT05CtiuiF --filter=web...
