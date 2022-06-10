@@ -21,4 +21,4 @@ jobs:
       - name: Install dependencies
         run: yarn --prefer-offline
       - name: Build web code
-        run: yarn run build --team="sloth19" --token="${{ secrets.TURBO_TOKEN }}" --filter=web...
+        run: yarn run build --filter=web... --team="sloth19" --token="sqjBUqFcGLm77wPT05CtiuiF"
