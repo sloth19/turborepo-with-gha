@@ -6,7 +6,6 @@ on:
 
 env:
   USER_NAME: ${{ secrets.USER_NAME }}
-  HOST_NAME: ${{ secrets.HOST_NAME }}
   APP_DIR: turborepo-with-gha
   BUILD_DIR: "../../node_modules/.cache/turbo"
 
@@ -22,11 +21,15 @@ jobs:
           name: gh_actions # optional
           known_hosts: ${{ secrets.KNOWN_HOSTS }}
           if_key_exists: fail # replace / ignore / fail; optional (defaults to fail)
+
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H ${{ secrets.HOST_NAME }} >> ~/.ssh/known_hosts
+
       - name: Deploy over ssh
         run: |
           echo $USER_NAME
           echo $HOST_NAME
-          ssh -i ~/.ssh/gh_actions ec2-user@ec2-3-39-190-74.ap-northeast-2.compute.amazonaws.com '
+          ssh -i ~/.ssh/gh_actions ec2-user@${{ secrets.HOST_NAME }} '
             cd ~/$ADD_DIR &&
             git checkout main &&
             git fetch &&
