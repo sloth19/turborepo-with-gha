@@ -5,8 +5,6 @@ on:
     branches: [main]
 
 env:
-  USER_NAME: ${{ secrets.USER_NAME }}
-  APP_DIR: turborepo-with-gha
   BUILD_DIR: "../../node_modules/.cache/turbo"
 
 jobs:
@@ -28,8 +26,8 @@ jobs:
       - name: Deploy over ssh
         run: |
           ssh -i ~/.ssh/gh_actions ec2-user@${{ secrets.HOST_NAME }} '
+            cd ~/turborepo-with-gha &&
             pwd &&
-            cd ~/$ADD_DIR &&
             git checkout main &&
             git fetch &&
             git reset --hard origin/main &&
