@@ -39,10 +39,8 @@ jobs:
 
             chmod +x .github/scripts/find-task-hash.sh &&
             BUILD_HASH=$(.github/scripts/find-task-hash.sh) &&
-            echo $BUILD_HASH &&
             
             cd apps/web &&            
             pm2 delete -s web || : &&
-            echo "$BUILD_DIR/$BUILD_HASH/apps/web" &&
             pm2 start yarn --name web -- run start "../../node_modules/.cache/turbo/$BUILD_HASH/apps/web"
           '
