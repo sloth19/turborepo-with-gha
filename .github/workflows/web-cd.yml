@@ -4,13 +4,15 @@ on:
   push:
     branches: [main]
 
-env:
-  BUILD_DIR: "../../node_modules/.cache/turbo"
-
 jobs:
   deploy:
     timeout-minutes: 15
     runs-on: ubuntu-latest
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+      BUILD_DIR: "../../node_modules/.cache/turbo"
+
     steps:
       - name: Install SSH key
         uses: shimataro/ssh-key-action@v2
@@ -41,5 +43,7 @@ jobs:
             echo $BUILD_HASH &&
             
             cd apps/web &&
+            pm2 stop web &&
+            pm2 delete web &&
             pm2 start yarn --name web -- run start "$BUILD_DIR/$BUILD_HASH/apps/web"
           '
