@@ -6,7 +6,7 @@ on:
       deploy_env:
         description: "Set the environment to deploy"
         required: true
-        default: "dev"
+        default: ""
         type: "choice"
         options:
           - dev
@@ -17,4 +17,4 @@ jobs:
   build:
     runs-on: ubuntu-20.04
     steps:
-      - run: echo ${{ inputs.deploy_env }}
+      - run: DEPLOY_ENV=${{ inputs.deploy_env }} || 'dev' && echo $DEPLOY_ENV
