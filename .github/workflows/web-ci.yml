@@ -17,4 +17,4 @@ jobs:
   build:
     runs-on: ubuntu-20.04
     steps:
-      - run: echo ${{ inputs.environment }}
+      - run: echo ${{ inputs.deploy_env }}
