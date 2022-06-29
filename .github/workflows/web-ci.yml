@@ -3,10 +3,15 @@ name: Web CD(development)
 on:
   workflow_dispatch:
     inputs:
-      environment:
+      deploy_env:
         description: "Set the environment to deploy"
-        type: "environment"
         required: true
+        default: "dev"
+        type: "choice"
+        options:
+          - dev
+          - qa
+          - prod
 
 jobs:
   build:
