@@ -23,6 +23,6 @@ jobs:
       - name: get-env.sh test
         run: | 
           chmod +x ./.github/scripts/get-env.sh
-          ./.github/scripts/get-env.sh "${{ inputs.deploy_env }}"
-          DEPOLY_ENV=$(./.github/scripts/get-env.sh "${{ inputs.deploy_env }}")
-          echo "$DEPOLY_ENV"
+          DEPLOY_ENV=$(./.github/scripts/get-env.sh "${{ inputs.deploy_env }}")
+          APP_NAME="${{ env.APP_NAME }}-$DEPLOY_ENV"
+          echo "$APP_NAME"
