@@ -5,4 +5,4 @@ then
     ENV=dev
 fi
 
-echo $ENV
+echo "$ENV"
