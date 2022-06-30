@@ -19,8 +19,7 @@ jobs:
   build:
     runs-on: ubuntu-20.04
     steps:
-      - run: |
-          ls -al ./.github/scripts/get-env.sh
+      - uses: actions/checkout@v3
       - name: get-env.sh test
         run: | 
           chmod +x "${GITHUB_WORKSPACE}/.github/scripts/get-env.sh"
